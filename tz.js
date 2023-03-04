@@ -1,15 +1,29 @@
 const moment = require('moment-timezone');
+const { command } = require('yargs');
+const yargs = require('yargs');
 
 moment.tz.setDefault('America/New_York');
 
 let targetTimeZone = ('America/New_York');
 
-if (process.argv.length !== 3) {
-  console.log('Usages: node <script-file> <timezone>');
-  process.exit(1);
+const cmd = yargs.argv._[0];
+const params = yargs.argv;
+
+targetTimeZone = cmd;
+
+if (params.format) {
+  console.log(`The time here is: ${moment().tz('America/New_York').format('dddd, MMMM Do YYYY, h:mm:ss a')}`);
+  console.log(`The time in ${targetTimeZone} is: ${moment().tz(targetTimeZone).format('dddd, MMMM Do YYYY, h:mm:ss a')}`);
 } else {
-  targetTimeZone = process.argv[2];
+  console.log(`The time here is: ${moment().tz('America/New_York')}`);
+  console.log(`The time in ${targetTimeZone} is: ${moment().tz(targetTimeZone)}`);
 }
 
-console.log(`The time in the ${targetTimeZone} timezone is ${moment().tz(targetTimeZone).format()}`);
+// if (cmd.length !== 3) { // Original tutorial
+//   console.log('Usages: node <script-file> <timezone>');
+//   process.exit(1);
+// } else {
+//  targetTimeZone = cmd[2];
+// }
+
 console.log(''); // just a spacer to make things look better

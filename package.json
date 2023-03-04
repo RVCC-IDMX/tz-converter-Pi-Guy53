@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "moment": "^2.29.4",
-    "moment-timezone": "^0.5.41"
+    "moment-timezone": "^0.5.41",
+    "yargs": "^17.7.1"
   }
 }
